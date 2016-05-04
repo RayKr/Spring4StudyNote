@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- p命名空间设值注入方式 -->
+    <bean id="mySchool" class="com.swroom.di05.School" p:name="南京大学"/>
+    <!-- c命名空间构造器注入方式 -->
+    <bean id="student1" class="com.swroom.di05.Student">
+        <property name="name" value="张三"/>
+        <property name="age" value="#{T(java.lang.Math).random() * 70}"/>
+        <property name="mySchool" ref="mySchool"/>
+    </bean>
+    <bean id="student2" class="com.swroom.di05.Student">
+        <property name="name" value="李四"/>
+        <property name="age" value="#{student1.changeAge()}"/>
+        <property name="mySchool" ref="mySchool"/>
+    </bean>
+
+
+</beans>

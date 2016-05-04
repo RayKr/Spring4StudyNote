@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mySchool" abstract="true">
+        <property name="mySchool" value="青岛大学"/>
+        <property name="department" value="计算机学院"/>
+    </bean>
+    <bean id="student1" class="com.swroom.di07.Student" parent="mySchool">
+        <property name="name" value="张三"/>
+        <property name="age" value="23"/>
+    </bean>
+    <bean id="student2" class="com.swroom.di07.Student" parent="mySchool">
+        <property name="name" value="李四"/>
+        <property name="age" value="24"/>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 设值注入方式：实际是调用bean的setter方法-->
+    <bean id="mySchool" class="com.swroom.di02.School">
+        <property name="name" value="青岛大学" />
+    </bean>
+
+    <!-- 构造注入方式： 调用bean的带参构造函数 -->
+    <bean id="student" class="com.swroom.di02.Student">
+        <constructor-arg name="name" value="李四"/>
+        <constructor-arg name="age" value="24"/>
+        <constructor-arg name="mySchool" ref="mySchool"/>
+    </bean>
+
+
+</beans>

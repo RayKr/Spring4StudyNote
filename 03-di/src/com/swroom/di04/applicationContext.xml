@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- p命名空间设值注入方式 -->
+    <bean id="mySchool1" class="com.swroom.di04.School">
+        <property name="name" value="山东理工大学"/>
+    </bean>
+    <bean id="mySchool2" class="com.swroom.di04.School">
+        <property name="name" value="山东大学"/>
+    </bean>
+    <!-- c命名空间构造器注入方式 -->
+    <bean id="student" class="com.swroom.di04.Student">
+        <property name="name" value="景昀"/>
+        <property name="mySchool" ref="mySchool1"/>
+        <property name="age" value="26"/>
+        <property name="mList">
+            <list>
+                <ref bean="mySchool1"/>
+                <ref bean="mySchool2"/>
+            </list>
+        </property>
+        <property name="mMap">
+            <map>
+                <entry key="QQ" value="371929908" />
+                <entry key="Email" value="jingzonglei@163.com" />
+            </map>
+        </property>
+        <property name="mSets">
+            <set>
+                <value>中国</value>
+                <value>山东</value>
+                <value>青岛</value>
+            </set>
+        </property>
+        <property name="mStrs">
+            <array>
+                <value>山东</value>
+                <value>济南</value>
+                <value>找蓝翔</value>
+            </array>
+        </property>
+        <property name="mPros">
+            <props>
+                <prop key="address">青岛广电大厦</prop>
+                <prop key="link">swroom.com</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>
