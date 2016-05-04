@@ -1,6 +1,7 @@
 package com.swroom.utils;
 
 /**
+ * 底层服务
  * Created by Ray on 2016/5/4.
  */
 public class SomeUtil {
