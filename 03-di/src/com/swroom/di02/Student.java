@@ -19,6 +19,9 @@ public class Student {
         this.school = school;
     }
 
+    public Student(String name, String age, School mySchool) {
+    }
+
     @Override
     public String toString() {
         return "Student{" +

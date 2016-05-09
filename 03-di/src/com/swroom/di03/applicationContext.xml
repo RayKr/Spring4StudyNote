@@ -8,7 +8,7 @@
     <!-- p命名空间设值注入方式 -->
     <bean id="mySchool" class="com.swroom.di03.School" p:name="南京大学"/>
     <!-- c命名空间构造器注入方式 -->
-    <bean id="student" class="com.swroom.di03.Student" c:name="王五" c:age="33" c:mySchool-ref="mySchool" />
+    <bean id="student" class="com.swroom.di03.Student" c:name="王五" c:age="33" c:school-ref="mySchool" />
 
 
 </beans>

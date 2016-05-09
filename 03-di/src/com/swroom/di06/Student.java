@@ -8,6 +8,7 @@ public class Student {
     private String name;
     private int age;
     private School school;
+    private School mySchool;
 
     @Override
     public String toString() {
@@ -28,5 +29,13 @@ public class Student {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
+
+    public School getMySchool() {
+        return mySchool;
     }
 }

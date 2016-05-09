@@ -39,4 +39,16 @@ public class Student {
     public void setSchool(School school) {
         this.school = school;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public School getSchool() {
+        return school;
+    }
 }

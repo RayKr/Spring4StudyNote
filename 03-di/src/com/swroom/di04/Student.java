@@ -15,6 +15,7 @@ public class Student {
     private String[] mStrs;
     private Set<String> mSets;
     private Properties mPros;
+    private School mySchool;
 
     public List<School> getmList() {
         return mList;
@@ -92,5 +93,13 @@ public class Student {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
+
+    public School getMySchool() {
+        return mySchool;
     }
 }

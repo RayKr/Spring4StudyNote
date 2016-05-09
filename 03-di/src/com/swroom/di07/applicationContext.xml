@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="mySchool" abstract="true">
-        <property name="mySchool" value="青岛大学"/>
+        <property name="school" value="青岛大学"/>
         <property name="department" value="计算机学院"/>
     </bean>
     <bean id="student1" class="com.swroom.di07.Student" parent="mySchool">

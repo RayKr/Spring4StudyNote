@@ -8,6 +8,7 @@ public class Student {
     private String name;
     private int age;
     private School school;
+    private School mySchool;
 
     public Student() {
         // 构造注入是不调用无参构造器的
@@ -42,5 +43,13 @@ public class Student {
 
     public int changeAge() {
         return age > 25 ? 25 : age;
+    }
+
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
+
+    public School getMySchool() {
+        return mySchool;
     }
 }
