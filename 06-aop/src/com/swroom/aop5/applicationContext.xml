@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--目标对象-->
+    <bean id="someService" class="com.swroom.aop5.SomeServiceImpl"/>
+    <!--切面：后置通知-->
+    <bean id="afterAdvice" class="com.swroom.aop5.MyAfterReturningAdvice"/>
+    <!--切面：顾问 指定切入点-->
+    <bean id="afterAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="afterAdvice"/>
+        <!--<property name="mappedNames">-->
+            <!--<array>-->
+                <!--<value>doSome</value>-->
+                <!--<value>doThird</value>-->
+            <!--</array>-->
+        <!--</property>-->
+        <!--<property name="mappedNames" value="doSome, doThid" />-->
+        <property name="mappedNames" value="do*" />
+    </bean>
+    <!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="someService"/>
+        <property name="interceptorNames" value="afterAdvisor"/>
+    </bean>
+
+
+
+</beans>
