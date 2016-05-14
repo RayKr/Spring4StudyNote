@@ -6,7 +6,7 @@
     <!--目标对象-->
     <bean id="someService" class="com.swroom.aop2.SomeServiceImpl"/>
 
-    <!--切面：前置通知-->
+    <!--切面：后置通知-->
     <bean id="afterReturning" class="com.swroom.aop2.MyAfterReturningAdvice"/>
 
     <!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器-->

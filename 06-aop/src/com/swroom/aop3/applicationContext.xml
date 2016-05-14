@@ -6,15 +6,15 @@
     <!--目标对象-->
     <bean id="someService" class="com.swroom.aop3.SomeServiceImpl"/>
 
-    <!--切面：前置通知-->
-    <bean id="methodInter" class="com.swroom.aop3.MyMethodInterceptor"/>
+    <!--切面：环绕通知通知-->
+    <bean id="aroundAdvice" class="com.swroom.aop3.MyMethodInterceptor"/>
 
     <!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器-->
     <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="target" ref="someService"/>
         <!--可以不写该接口，因为默认自动检测到目标类所实现的所有接口-->
         <!--<property name="interfaces" value="com.swroom.aop1.ISomeService"/>-->
-        <property name="interceptorNames" value="methodInter"/>
+        <property name="interceptorNames" value="aroundAdvice"/>
     </bean>
 
 
