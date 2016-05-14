@@ -12,11 +12,12 @@ public class MyTest {
     @Test
     public void test01() {
 
-        String configLocation = "com/swroom/aop1/applicationContext.xml";
+        String configLocation = "com/swroom/aop3/applicationContext.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(configLocation);
 
         ISomeService service = (ISomeService) ac.getBean("serviceProxy");
         service.doSome();
+        System.out.println("-------------------------");
         service.doSecond();
 
     }
