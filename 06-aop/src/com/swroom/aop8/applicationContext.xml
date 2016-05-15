@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--目标对象-->
+    <bean id="someService1" class="com.swroom.aop8.SomeServiceImpl"/>
+    <bean id="someService2" class="com.swroom.aop8.SomeServiceImpl"/>
+    <!--切面：通知-->
+    <bean id="beforeAdvice" class="com.swroom.aop8.MyMethodBeforeAdvice"/>
+    <bean id="afterAdvice" class="com.swroom.aop8.MyAfterReturningAdvice"/>
+    <!--切面：顾问-->
+    <bean id="beforeAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="beforeAdvice"/>
+        <property name="mappedName" value="doSome"/>
+    </bean>
+    <bean id="afterAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="afterAdvice"/>
+        <property name="mappedName" value="doThird"/>
+    </bean>
+    <!--Bean名称自动代理生成器，不仅可以指定目标对象，还可以指定切面-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames" value="someService1"/>
+        <property name="interceptorNames" value="beforeAdvice"/>
+    </bean>
+
+
+
+</beans>
