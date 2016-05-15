@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--目标对象-->
+    <bean id="someService" class="com.swroom.aop6.SomeServiceImpl"/>
+    <!--切面：后置通知-->
+    <bean id="afterAdvice" class="com.swroom.aop6.MyAfterReturningAdvice"/>
+    <!--切面：顾问 指定切入点-->
+    <bean id="afterAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="afterAdvice"/>
+        <!--正则表达式匹配的对象为：全限定性方法名，而不仅仅是简单方法名-->
+        <!--<property name="pattern" value=".*T.*"/>-->
+        <!--<property name="pattern" value=".*Sec.*"/>-->
+        <property name="pattern" value=".*T.*|.*Sec.*"/>
+    </bean>
+    <!--代理对象的生成：注意这里的ProxyFactory不是代理类，而是代理对象生成器-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="someService"/>
+        <property name="interceptorNames" value="afterAdvisor"/>
+    </bean>
+
+
+
+</beans>
