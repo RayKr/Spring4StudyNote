@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--目标对象-->
+    <bean id="someService" class="com.swroom.aop7.SomeServiceImpl"/>
+    <!--切面：后置通知-->
+    <bean id="afterAdvice" class="com.swroom.aop7.MyAfterReturningAdvice"/>
+    <!--切面：顾问 指定切入点-->
+    <bean id="afterAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="afterAdvice"/>
+        <property name="mappedName" value="doSome"/>
+    </bean>
+    <!--默认Advisor自动代理生成器-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+
+
+</beans>
