@@ -22,7 +22,7 @@ class MyAspect {
     }
 
     @AfterReturning(value = "execution(* *..doSome(..))", returning = "result")
-    public void myAfter(Object result) {
+    public void myAfterReturning(Object result) {
         System.out.println("执行AspectJ后置通知,返回值=" + result);
     }
 
@@ -35,5 +35,10 @@ class MyAspect {
             result = ((String) result).toUpperCase();
         }
         return result;
+    }
+
+    @AfterThrowing(value = "execution(* *..ISomeService.doSome(..))", throwing = "ex")
+    public void myThrows(Exception ex) {
+        System.out.println("执行异常通知myThrows, ex=" + ex.getMessage());
     }
 }
