@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 目标对象 -->
+    <bean name="someService" class="com.swroom.service.SomeServiceImpl"/>
+    <!-- 切面 -->
+    <bean name="myAspect" class="com.swroom.aspects.MyAspect"/>
+
+    <!-- AOP配置-->
+    <aop:config>
+        <!-- 定义切入点 -->
+        <aop:pointcut id="doSomePointcut" expression="execution(* *..service.*.doSome(..))"/>
+        <aop:pointcut id="doSecondPointcut" expression="execution(* *..service.*.doSecond(..))"/>
+        <aop:pointcut id="doThirdPointcut" expression="execution(* *..service.*.doThird(..))"/>
+
+        <!-- 定义切面-->
+        <aop:aspect ref="myAspect">
+            <!-- 前置通知 -->
+            <aop:before method="myBefore" pointcut-ref="doSomePointcut"/>
+            <aop:before method="myBefore(org.aspectj.lang.JoinPoint)" pointcut-ref="doSomePointcut"/>
+
+            <!-- 后置通知：其他部分与前置通知相同 -->
+            <aop:after-returning method="myAfterReturning(java.lang.Object)" pointcut-ref="doSecondPointcut" returning="result"/>
+
+            <aop:around method="myAround" pointcut-ref="doThirdPointcut" />
+
+            <aop:after-throwing method="myThrows" pointcut-ref="doSomePointcut" throwing="ex"/>
+
+            <aop:after method="myAfter" pointcut-ref="doThirdPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
