@@ -21,7 +21,8 @@ public class MyTest {
         System.out.println("----------------------");
         service.doSecond();
         System.out.println("----------------------");
-        service.doThird();
+        String s = service.doThird();
+        System.out.println(s);
 
     }
 }

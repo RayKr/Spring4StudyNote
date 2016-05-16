@@ -6,5 +6,5 @@ package com.swroom.service;
 public interface ISomeService {
     String doSome();
     String doSecond();
-    int doThird();
+    String doThird();
 }

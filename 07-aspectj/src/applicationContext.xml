@@ -10,7 +10,7 @@
     <!-- 目标对象 -->
     <bean name="someService" class="com.swroom.service.SomeServiceImpl"/>
     <!-- 切面 -->
-    <bean name="myAspect" class="com.swroom.aspect.MyAspect"/>
+    <bean name="myAspect" class="com.swroom.aspects.MyAspect"/>
     <!-- AspectJ自动代理-->
     <aop:aspectj-autoproxy/>
 

@@ -17,8 +17,8 @@ public class SomeServiceImpl implements ISomeService {
     }
 
     @Override
-    public int doThird() {
+    public String doThird() {
         System.out.println("执行doThird()方法");
-        return 0;
+        return "Nut Beans";
     }
 }

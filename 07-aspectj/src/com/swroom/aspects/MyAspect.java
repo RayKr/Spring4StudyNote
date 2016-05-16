@@ -1,6 +1,7 @@
-package com.swroom.aspect;
+package com.swroom.aspects;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 /**
@@ -25,9 +26,14 @@ class MyAspect {
         System.out.println("执行AspectJ后置通知,返回值=" + result);
     }
 
-//    @Around("execution(* *..doThird(..))")
-//    public int myAround() {
-//        System.out.println("执行AspectJ环绕通知");
-//        return 1;
-//    }
+    @Around("execution(* *..doThird(..))")
+    public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
+        System.out.println("环绕：执行目标方法之前执行");
+        Object result = pjp.proceed();
+        System.out.println("环绕：执行目标方法之前执行,返回值=" + result);
+        if (result != null) {
+            result = ((String) result).toUpperCase();
+        }
+        return result;
+    }
 }
