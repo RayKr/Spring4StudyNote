@@ -41,4 +41,9 @@ class MyAspect {
     public void myThrows(Exception ex) {
         System.out.println("执行异常通知myThrows, ex=" + ex.getMessage());
     }
+
+    @After("execution(* *..doSome(..))")
+    public void myAfter() {
+        System.out.println("执行最终通知方法myAfter");
+    }
 }

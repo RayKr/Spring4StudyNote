@@ -6,7 +6,8 @@ package com.swroom.service;
 public class SomeServiceImpl implements ISomeService {
     @Override
     public String doSome() {
-        System.out.println("执行doSome()" + 4/0);
+//        System.out.println("执行doSome()" + 4/0);
+        System.out.println("执行doSome");
         return "Qingdao";
     }
 
