@@ -31,4 +31,17 @@ public class TestStudent {
     public void testRemove() {
         service.removeStudent(2);
     }
+
+    @Test
+    public void testFindStudentNameById() {
+        String name = service.findStudentNameById(2);
+        System.out.println(name);
+    }
+
+    @Test
+    public void testFindStudentById() {
+        Student student = service.findStudentById(3);
+        System.out.println(student);
+    }
+
 }

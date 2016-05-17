@@ -23,26 +23,31 @@ public class StudentDaoImpl extends JdbcDaoSupport implements IStudentDao {
 
     @Override
     public void updateStudent(Student student) {
-
+        String sql = "UPDATE student SET NAME = ?, age = ? WHERE id = ?";
+        this.getJdbcTemplate().update(sql, student.getName(), student.getAge(), student.getId());
     }
 
     @Override
     public String selectStudentNameById(int id) {
-        return null;
+        String sql = "select name from student where id = ?";
+        return this.getJdbcTemplate().queryForObject(sql, String.class, id);
     }
 
     @Override
     public List<String> selectStudentNames() {
-        return null;
+        String sql = "select name from student";
+        return this.getJdbcTemplate().queryForList(sql, String.class);
     }
 
     @Override
     public Student selectStudentById(int id) {
-        return null;
+        String sql = "select id, name, age from student where id = ?";
+        return this.getJdbcTemplate().queryForObject(sql, new StudentMapper(), id);
     }
 
     @Override
     public List<Student> selectStudents() {
-        return null;
+        String sql = "select id, name, age from student where";
+        return this.getJdbcTemplate().query(sql, new StudentMapper());
     }
 }
