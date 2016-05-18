@@ -40,16 +40,29 @@
     </bean>
 
     <!--注册事务管理器-->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!--事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="open*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="buyStock" isolation="DEFAULT" propagation="REQUIRED" rollback-for="StockException"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--AOP配置-->
+    <aop:config>
+        <!--切入点配置，用的是AspectJ的XML实现形式-->
+        <aop:pointcut id="stockPointcut" expression="execution(* *..service.*.*(..))"/>
+        <!--顾问要配置通知和切入点-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="stockPointcut"/>
+    </aop:config>
+
+
     <!--事务注解驱动-->
-    <tx:annotation-driven transaction-manager="txManager"/>
-
-
-
-
+    <!--<tx:annotation-driven transaction-manager="txManager"/>-->
 
     <!--<bean id="stockProxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">-->
         <!--&lt;!&ndash;事务管理器&ndash;&gt;-->
