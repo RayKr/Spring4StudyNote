@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--注册数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--注册Dao-->
+    <bean id="stockDao" class="com.swroom.dao.impl.StockDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="accountDao" class="com.swroom.dao.impl.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--注册Service-->
+    <bean id="stockService" class="com.swroom.service.StockProcessServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="stockDao" ref="stockDao"/>
+    </bean>
+
+    <!--注册事务管理器-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--注册事务代理-->
+    <bean id="stockProxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <!--事务管理器-->
+        <property name="transactionManager" ref="txManager"/>
+        <!--service-->
+        <property name="target" ref="stockService"/>
+        <!--事务属性-->
+        <property name="transactionAttributes">
+            <props>
+                <!--key就是切入点, value就是事务隔离和传播方法配置-->
+                <prop key="open*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>
+                <!--受查时异常提交，可以手动指定回滚，方法是用"-StockException"-->
+                <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-StockException</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
