@@ -18,7 +18,7 @@ public class StockProcessServiceImplTest {
         String configLocation = "spring-config.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(configLocation);
 
-        service = (IStockProcessService) ac.getBean("stockProxyService");
+        service = (IStockProcessService) ac.getBean("stockService");
     }
 
     @Test

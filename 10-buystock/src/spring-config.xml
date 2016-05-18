@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -37,21 +44,27 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--注册事务代理-->
-    <bean id="stockProxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <!--事务管理器-->
-        <property name="transactionManager" ref="txManager"/>
-        <!--service-->
-        <property name="target" ref="stockService"/>
-        <!--事务属性-->
-        <property name="transactionAttributes">
-            <props>
-                <!--key就是切入点, value就是事务隔离和传播方法配置-->
-                <prop key="open*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>
-                <!--受查时异常提交，可以手动指定回滚，方法是用"-StockException"-->
-                <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-StockException</prop>
-            </props>
-        </property>
-    </bean>
+    <!--事务注解驱动-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+
+
+
+
+    <!--<bean id="stockProxyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">-->
+        <!--&lt;!&ndash;事务管理器&ndash;&gt;-->
+        <!--<property name="transactionManager" ref="txManager"/>-->
+        <!--&lt;!&ndash;service&ndash;&gt;-->
+        <!--<property name="target" ref="stockService"/>-->
+        <!--&lt;!&ndash;事务属性&ndash;&gt;-->
+        <!--<property name="transactionAttributes">-->
+            <!--<props>-->
+                <!--&lt;!&ndash;key就是切入点, value就是事务隔离和传播方法配置&ndash;&gt;-->
+                <!--<prop key="open*">ISOLATION_DEFAULT,PROPAGATION_REQUIRED</prop>-->
+                <!--&lt;!&ndash;受查时异常提交，可以手动指定回滚，方法是用"-StockException"&ndash;&gt;-->
+                <!--<prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-StockException</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 </beans>
