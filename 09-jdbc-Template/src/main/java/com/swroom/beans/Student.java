@@ -1,8 +1,14 @@
 package com.swroom.beans;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by Ray on 2016/5/16.
  */
+@Entity
 public class Student {
     private Integer id;// 需要对id进行非空判断，所以用Integer
     private String name;
@@ -16,6 +22,8 @@ public class Student {
         this.age = age;
     }
 
+    @Id
+    @GeneratedValue()
     public Integer getId() {
         return id;
     }

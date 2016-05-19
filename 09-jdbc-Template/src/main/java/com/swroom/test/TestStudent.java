@@ -24,7 +24,7 @@ public class TestStudent {
 
     @Test
     public void testAdd() {
-        service.addStudent(new Student("张三", 23));
+        service.addStudent(new Student("张三疯", 25));
     }
 
     @Test
