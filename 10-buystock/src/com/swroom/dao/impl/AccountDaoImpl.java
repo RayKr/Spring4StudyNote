@@ -1,16 +1,22 @@
 package com.swroom.dao.impl;
 
+import com.swroom.beans.Account;
 import com.swroom.dao.IAccountDao;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Ray on 2016/5/17.
  */
-public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
+@Repository("accountDao")
+public class AccountDaoImpl implements IAccountDao {
+    private SessionFactory sessionFactory;
+
     @Override
     public void insertAccount(String aname, double money) {
         String sql = "insert into account(aname, balance) values(?,?)";
-        this.getJdbcTemplate().update(sql, aname, money);
+        this.getSessionFactory().getCurrentSession().save(new Account(aname, money));
     }
 
     @Override
@@ -20,6 +26,15 @@ public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
             sql = "update account set balance = balance - ? where aname = ?";
         }
 
-        this.getJdbcTemplate().update(sql, money, aname);
+//        this.getJdbcTemplate().update(sql, money, aname);
+    }
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

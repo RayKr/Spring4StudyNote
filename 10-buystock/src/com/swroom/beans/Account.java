@@ -1,8 +1,13 @@
 package com.swroom.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by Ray on 2016/5/17.
  */
+@Entity
 public class Account {
     private Integer aid;
     private String aname;
@@ -25,6 +30,8 @@ public class Account {
                 '}';
     }
 
+    @Id
+    @GeneratedValue()
     public Integer getAid() {
         return aid;
     }

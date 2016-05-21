@@ -1,8 +1,13 @@
 package com.swroom.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by Ray on 2016/5/17.
  */
+@Entity
 public class Stock {
     private Integer sid;
     private String sname;
@@ -16,6 +21,8 @@ public class Stock {
         this.count = count;
     }
 
+    @Id
+    @GeneratedValue()
     public Integer getSid() {
         return sid;
     }

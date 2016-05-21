@@ -3,19 +3,24 @@ package com.swroom.service;
 import com.swroom.beans.StockException;
 import com.swroom.dao.IAccountDao;
 import com.swroom.dao.IStockDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Ray on 2016/5/17.
  */
+@Service("stockService")
 public class StockProcessServiceImpl implements IStockProcessService {
 
     private IAccountDao accountDao;
     private IStockDao stockDao;
 
+    @Autowired
     public void setAccountDao(IAccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
+    @Autowired
     public void setStockDao(IStockDao stockDao) {
         this.stockDao = stockDao;
     }
